@@ -51,7 +51,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
-    public ResponseEntity me(HttpServletRequest request){
+    public ResponseEntity<?> me(HttpServletRequest request){
         try{
             User user = userService.getUser(Integer.parseInt((String) request.getAttribute("user_id")));
             return ResponseEntity.ok(user);
