@@ -33,8 +33,6 @@ public class AuthController {
 
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
-        System.out.println(authenticationRequest.getPassword());
-        System.out.println(authenticationRequest.getUsername());
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
         }catch(Exception e){
@@ -43,7 +41,6 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new Response("The username or password is not correct.", null));
         }
         final User userDetails = userService.loadUserByUsername(authenticationRequest.getUsername());
-
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
