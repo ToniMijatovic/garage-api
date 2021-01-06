@@ -36,8 +36,6 @@ public class AuthController {
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
         }catch(Exception e){
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause());
             return ResponseEntity.badRequest().body(new Response("The username or password is not correct.", null));
         }
         final User userDetails = userService.loadUserByUsername(authenticationRequest.getUsername());

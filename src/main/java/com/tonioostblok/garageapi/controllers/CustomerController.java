@@ -4,10 +4,8 @@ import com.tonioostblok.garageapi.entities.Customer;
 import com.tonioostblok.garageapi.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,17 +26,32 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
-    public ResponseEntity<?> addCustomer(HttpServletRequest request){
-        return ResponseEntity.ok("ok");
+    public ResponseEntity<?> addCustomer(@RequestBody  Customer customer, HttpServletRequest request){
+        try{
+            customerService.addOrUpdateCustomer(customer);
+            return ResponseEntity.ok(customer);
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("{\"error\":\"Something went wrong whilst trying to add a customer.\"}");
+        }
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateCustomer(HttpServletRequest request){
-        return ResponseEntity.ok("ok");
+    public ResponseEntity<?> updateCustomer(@RequestBody  Customer customer, HttpServletRequest request){
+        try{
+            customerService.addOrUpdateCustomer(customer);
+            return ResponseEntity.ok(customer);
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("{\"error\":\"Something went wrong whilst trying to add a customer.\"}");
+        }
     }
 
-    @RequestMapping(value = "/customer", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteCustomer(HttpServletRequest request){
-        return ResponseEntity.ok("ok");
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteCustomer(@PathVariable(value = "id") int customer_id, HttpServletRequest request){
+        try{
+            customerService.deleteUser(customer_id);
+            return ResponseEntity.noContent().build();
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("{\"error\":\"Something went wrong whilst trying to add a customer.\"}");
+        }
     }
 }

@@ -50,7 +50,7 @@ public class Customer {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -58,7 +58,7 @@ public class Customer {
     }
 
     public String getFirstname() {
-        return firstname;
+        return this.firstname;
     }
 
     public void setFirstname(String firstname) {
@@ -66,19 +66,23 @@ public class Customer {
     }
 
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
-    public String getPhonenumber() { return this.phonenumber; }
+    public String getPhonenumber() {
+        return this.phonenumber;
+    }
 
-    public void setPhonenumber(String phonenumber) { this.phonenumber = phonenumber; }
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -86,18 +90,18 @@ public class Customer {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
-    public void setAddress(String email) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
     public String getZipcode() {
-        return zipcode;
+        return this.zipcode;
     }
 
-    public void setZipcode(String email) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
