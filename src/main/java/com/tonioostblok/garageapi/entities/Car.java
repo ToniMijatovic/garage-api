@@ -30,6 +30,10 @@ public class Car {
         this.mot = mot;
     }
 
+    public Car(int id){
+        this.id = id;
+    }
+
     public Car(){
 
     }
@@ -43,7 +47,7 @@ public class Car {
     }
 
     public String getBrand() {
-        return brand;
+        return this.brand;
     }
 
     public void setBrand(String brand) {
@@ -51,7 +55,7 @@ public class Car {
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(String type) {
@@ -59,7 +63,7 @@ public class Car {
     }
 
     public String getLicense_plate() {
-        return license_plate;
+        return this.license_plate;
     }
 
     public void setLicense_plate(String license_plate) {
@@ -67,7 +71,7 @@ public class Car {
     }
 
     public String getMot() {
-        return mot;
+        return this.mot;
     }
 
     public void setMot(String mot) {
