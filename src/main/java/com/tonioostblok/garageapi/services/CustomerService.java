@@ -59,12 +59,5 @@ public class CustomerService {
 
         this.addOrUpdateCustomer(customer);
         return customer;
-//        customer.setCars();
-//        for(Car car : customerCars) {
-//            if(car.getId() == car_id) {
-//                customerCars.remove(car);
-//            }
-//        }
-
     }
 }
