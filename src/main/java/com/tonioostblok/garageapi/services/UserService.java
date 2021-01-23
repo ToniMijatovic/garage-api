@@ -47,7 +47,6 @@ public class UserService extends UserServiceInterface {
     @Override
     public User loadUserByUsername(String email) {
             User user = userRepository.findByEmail(email);
-        System.out.println(user.getFirstname());
             if (user == null) {
                 return new User(
                         " ", " ", true, true, true, true,

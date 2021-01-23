@@ -30,7 +30,7 @@ public class CarController {
             Car savedCar = carService.addOrUpdateCar(car);
             return ResponseEntity.ok(savedCar);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("{\"error\":\"Something went wrong whilst trying to add a new car.\"}");
+            return ResponseEntity.badRequest().body("{\"error\":\"Something went wrong whilst trying to add a car.\"}");
         }
     }
     @RequestMapping(value = "/car", method = RequestMethod.PUT)

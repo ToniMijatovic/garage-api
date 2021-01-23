@@ -18,6 +18,15 @@ public class Car {
     private String license_plate;
     private String mot;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "car_files",
+            joinColumns = @JoinColumn(
+                    name = "car_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "file_id", referencedColumnName = "id"))
+    private Collection<File> files;
+
     public Car(
             String brand,
             String type,
@@ -76,5 +85,12 @@ public class Car {
 
     public void setMot(String mot) {
         this.mot = mot;
+    }
+
+    public void setFiles(Collection<File> files) {
+        this.files = files;
+    }
+    public Collection<File> getFiles() {
+        return this.files;
     }
 }
