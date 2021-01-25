@@ -7,11 +7,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "privilege")
-public class Privilege {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Privilege extends BaseEntity{
 
     private String name;
 

@@ -2,23 +2,23 @@ package com.tonioostblok.garageapi.entities;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
 @Entity
 @Table(name = "car")
-public class Car {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Car extends BaseEntity {
 
     private String brand;
     private String type;
     private String license_plate;
     private String mot;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "car_files",
             joinColumns = @JoinColumn(
@@ -40,19 +40,11 @@ public class Car {
     }
 
     public Car(int id){
-        this.id = id;
+        this.setId(id);
     }
 
     public Car(){
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getBrand() {

@@ -4,10 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "file")
-public class File {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class File extends BaseEntity {
 
     private String file;
 
@@ -18,19 +15,11 @@ public class File {
     }
 
     public File(int id) {
-        this.id = id;
+        this.setId(id);
     }
 
     public File() {
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFile() {

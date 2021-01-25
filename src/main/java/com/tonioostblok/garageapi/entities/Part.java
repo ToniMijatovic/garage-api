@@ -7,10 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "parts")
 @DynamicUpdate
-public class Part {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Part extends BaseEntity {
 
     private String name;
     private Double price;
@@ -27,19 +24,11 @@ public class Part {
     }
 
     public Part(int id) {
-        this.id = id;
+        this.setId(id);
     }
 
     public Part() {
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setName(String name) {

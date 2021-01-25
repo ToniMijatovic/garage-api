@@ -2,20 +2,15 @@ package com.tonioostblok.garageapi.entities;
 
 import javax.persistence.*;
 
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class User extends BaseEntity implements UserDetails {
 
     private String firstname;
     private String lastname;
@@ -42,14 +37,6 @@ public class User implements UserDetails {
         this.email = email;
         this.setPassword(password);
         this.authorities = authorities;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstname() {

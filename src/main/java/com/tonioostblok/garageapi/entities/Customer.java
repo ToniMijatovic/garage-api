@@ -20,7 +20,7 @@ public class Customer {
     private String address;
     private String zipcode;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "customer_car",
             joinColumns = @JoinColumn(
