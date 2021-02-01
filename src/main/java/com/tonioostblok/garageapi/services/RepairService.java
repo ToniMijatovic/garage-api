@@ -1,5 +1,6 @@
 package com.tonioostblok.garageapi.services;
 
+import com.tonioostblok.garageapi.entities.Action;
 import com.tonioostblok.garageapi.entities.Car;
 import com.tonioostblok.garageapi.entities.Part;
 import com.tonioostblok.garageapi.entities.Repair;
@@ -19,6 +20,8 @@ public class RepairService {
     private CarService carService;
     @Autowired
     private PartService partService;
+    @Autowired
+    private ActionService actionService;
 
     public Iterable<Repair> getAllRepairs() {
         return repairRepository.findAll();
@@ -39,7 +42,7 @@ public class RepairService {
 
     public Repair getAllRepairInformation(int id) {
         Repair repair = this.getRepair(id);
-        System.out.println(id);
+
         int car_id = repair.getCar().getId();
         if(car_id > 0) {
             repair.setCar(carService.getCar(car_id));
@@ -56,6 +59,18 @@ public class RepairService {
         }
 
         repair.setParts(partsToAdd);
+
+        Collection<Action> actionsToAdd = new java.util.ArrayList<>(Collections.emptyList());
+
+        Collection<Action> actions = repair.getActions();
+        for (Action action : actions){
+            Action fetchedAction = actionService.getAction(action.getId());
+            if(fetchedAction.getId() != 0){
+                actionsToAdd.add(fetchedAction);
+            }
+        }
+
+        repair.setActions(actionsToAdd);
 
         return repair;
     }

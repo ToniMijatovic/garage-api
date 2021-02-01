@@ -27,6 +27,16 @@ public class Repair extends BaseEntity{
 
     private Collection<Part> parts;
 
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(
+            name = "repair_action",
+            joinColumns = @JoinColumn(
+                    name = "repair_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "action_id", referencedColumnName = "id"))
+
+    private Collection<Action> actions;
+
     public Repair(String name, String description, Timestamp scheduled_at, String status) {
         this.name = name;
         this.description = description;
@@ -88,6 +98,14 @@ public class Repair extends BaseEntity{
 
     public void setParts(Collection<Part> parts) {
         this.parts = parts;
+    }
+
+    public Collection<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(Collection<Action> actions) {
+        this.actions = actions;
     }
 
 }
