@@ -6,12 +6,15 @@ import javax.persistence.*;
 @Table(name = "file")
 public class File extends BaseEntity {
 
-    private String file;
+    private String name;
+    private String url;
 
     public File(
-            String file
+            String name,
+            String url
     ) {
-        this.file = file;
+        this.name = name;
+        this.url = url;
     }
 
     public File(int id) {
@@ -22,11 +25,19 @@ public class File extends BaseEntity {
 
     }
 
-    public String getFile() {
-        return this.file;
+    public String getUrl() {
+        return this.url;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setUr(String url) {
+        this.url = url;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

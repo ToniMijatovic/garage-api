@@ -5,6 +5,8 @@ import com.tonioostblok.garageapi.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service("carService")
 public class CarService {
     @Autowired
@@ -24,5 +26,27 @@ public class CarService {
 
     public Car addOrUpdateCar(Car car) {
         return carRepository.save(car);
+    }
+
+    public void addFileToCar(File file, int car_id){
+        Car car = this.getCar(car_id);
+
+        Collection<File> files = car.getFiles();
+
+        files.add(file);
+
+        this.addOrUpdateCar(car);
+    }
+
+    public void removeFileFromCar(int car_id, File file){
+        Car car = this.getCar(car_id);
+
+        Collection<File> files = car.getFiles();
+
+        files.remove(file);
+
+        car.setFiles(files);
+
+        this.addOrUpdateCar(car);
     }
 }
