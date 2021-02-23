@@ -45,6 +45,9 @@ public class Customer {
         this.zipcode = zipcode;
     }
 
+    public Customer(int id){
+        this.id = id;
+    }
     public Customer(){
 
     }
