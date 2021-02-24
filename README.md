@@ -198,7 +198,213 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+## Customer endpoints
+```json
+GET /customer/{id}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}
+```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
 
+{
+    "id": 1,
+    "firstname": "Foo",
+    "lastname": "Bar",
+    "phonenumber": "0612345678",
+    "email": "foo@bar.com",
+    "address": "Foobar street 4",
+    "zipcode": "1234FB",
+    "cars": [
+        {
+          "id": 1,
+          "brand": "Opel",
+          "type": "Corsa",
+          "license_plate": "NL-FB-12-AB",
+          "mot": "2021-01-06",
+          "files": [
+            {
+              "id": 1,
+              "name": "foobar",
+              "url": "foobar.png"
+            }
+          ]     
+        },
+    ]
+}
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
+
+```json
+POST /customer
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+    "firstname": "Foo",
+    "lastname": "Bar",
+    "phonenumber": "0612345678",
+    "email": "foo@bar.com",
+    "address": "Foobar street 4",
+    "zipcode": "1234FB",
+    "cars":[1]
+}
+```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "id": 1,
+    "firstname": "Foo",
+    "lastname": "Bar",
+    "phonenumber": "0612345678",
+    "email": "foo@bar.com",
+    "address": "Foobar street 4",
+    "zipcode": "1234FB",
+    "cars": [
+        {
+        "id": 1,
+        "brand": "Opel",
+        "type": "Corsa",
+        "license_plate": "NL-FB-12-AB",
+        "mot": "2021-01-06",
+        "files": [
+            {
+                "id": 1,
+                "name": "foobar",
+                "url": "foobar.png"
+            }
+        ]
+        },
+    ]
+}
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
+
+```json
+PUT /customer
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+    "id": 1,
+    "firstname": "Foo",
+    "lastname": "Bar",
+    "phonenumber": "0612345678",
+    "email": "foo@bar.com",
+    "address": "Foobar street 4",
+    "zipcode": "1234FB",
+}
+```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "id": 1,
+    "firstname": "Foo",
+    "lastname": "Bar",
+    "phonenumber": "0612345678",
+    "email": "foo@bar.com",
+    "address": "Foobar street 4",
+    "zipcode": "1234FB",
+}
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
+
+```json
+DEL /customer/{id}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}
+```
+**Successful Response:**
+```json
+HTTP/1.1 204 No Content
+Content-Type: application/json
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
+```json
+POST /customer/{customer_id}/car/{car_id}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}
+```
+**Successful Response:**
+```json
+HTTP/1.1 200
+Content-Type: application/json
+{
+    "id": 1,
+    "firstname": "Foo",
+    "lastname": "Bar",
+    "phonenumber": "0612345678",
+    "email": "foo@bar.com",
+    "address": "Foobar street 4",
+    "zipcode": "1234FB",
+    "cars": [
+        {
+            "id": 1,
+            "brand": "Opel",
+            "type": "Corsa",
+            "license_plate": "NL-FB-12-AB",
+            "mot": "2021-01-06",
+            "files": [
+                {
+                "id": 1,
+                "name": "foobar",
+                "url": "foobar.png"
+                }
+            ]
+        },
+    ]
+}
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
+```json
+DEL /customer/{customer_id}/car/{car_id}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}
+```
+**Successful Response:**
+```json
+HTTP/1.1 204 No Content
+Content-Type: application/json
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
 ## Part endpoints
 ```json
 GET /part/{id}
@@ -701,6 +907,60 @@ Content-Type: application/json
 
 ```json
 DEL /repair/{id}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}
+```
+**Successful Response:**
+```json
+HTTP/1.1 204 No Content
+Content-Type: application/json
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
+
+## File endpoints
+```json
+GET /file/{id}
+Authorization: Bearer {token}
+```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Content-Type: multipart/form-data
+File will be returned
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+``` 
+
+```json
+POST /file
+Accept: multipart/form-data
+Content-Type: multipart/form-data
+Authorization: Bearer {token}
+
+Name: Car papers
+File: carpapers.png (this is the uploaded file)
+```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+```
+
+```json
+DEL /file/{id}
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {token}
