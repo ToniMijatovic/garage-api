@@ -1,5 +1,19 @@
 # garage-api
 
+# Installation
+
+## Clone the repository
+To clone the repository, run
+```
+git clone https://github.com/tonioostblok/garage-api
+```
+## Run the docker mysql container
+To run the docker mysql container, open your terminal and go to the .docker folder. After that run the following command and you are set:
+```
+docker-compose up -d
+```
+## Run the application
+To run the application, just open the project in IntelliJ and run the GarageApplication.java file.
 
 # Endpoint documentation
 
