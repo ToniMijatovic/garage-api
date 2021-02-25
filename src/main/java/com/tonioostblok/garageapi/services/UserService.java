@@ -1,6 +1,5 @@
 package com.tonioostblok.garageapi.services;
 
-import com.tonioostblok.garageapi.entities.Privilege;
 import com.tonioostblok.garageapi.entities.Role;
 import com.tonioostblok.garageapi.entities.User;
 import com.tonioostblok.garageapi.repositories.RoleRepository;
@@ -8,7 +7,6 @@ import com.tonioostblok.garageapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,7 +29,9 @@ public class UserService extends UserServiceInterface {
 
     @Override
     public User getUser(int id) {
-        return userRepository.findById(id).get();
+        User user = userRepository.findById(id).get();
+        user.setAuthorities(this.getAuthorities(user.getRoles()));
+        return user;
     }
 
     @Override
@@ -60,26 +60,20 @@ public class UserService extends UserServiceInterface {
     private Collection<GrantedAuthority> getAuthorities(
             Collection<Role> roles) {
 
-        return getGrantedAuthorities(getPrivileges(roles));
+        return getGrantedAuthorities(getRoles(roles));
     }
 
-    private List<String> getPrivileges(Collection<Role> roles) {
-
-        List<String> privileges = new ArrayList<>();
-        List<Privilege> collection = new ArrayList<>();
+    private List<String> getRoles(Collection<Role> roles) {
+        List<String> rolesList = new ArrayList<>();
         for (Role role : roles) {
-            collection.addAll(role.getPrivileges());
+            rolesList.add(role.getName());
         }
-        for (Privilege item : collection) {
-            privileges.add(item.getName());
-        }
-        return privileges;
+        return rolesList;
     }
-
-    private Collection<GrantedAuthority> getGrantedAuthorities(List<String> privileges) {
+    private Collection<GrantedAuthority> getGrantedAuthorities(List<String> roles) {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        for (String privilege : privileges) {
-            authorities.add(new SimpleGrantedAuthority(privilege));
+        for (String role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
     }

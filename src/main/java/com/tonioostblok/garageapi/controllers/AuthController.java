@@ -1,24 +1,18 @@
 package com.tonioostblok.garageapi.controllers;
 
-import com.tonioostblok.garageapi.entities.Privilege;
-import com.tonioostblok.garageapi.entities.Role;
 import com.tonioostblok.garageapi.entities.User;
 import com.tonioostblok.garageapi.models.AuthenticationRequest;
 import com.tonioostblok.garageapi.models.AuthenticationResponse;
 import com.tonioostblok.garageapi.models.Response;
 import com.tonioostblok.garageapi.services.UserService;
 import com.tonioostblok.garageapi.util.JwtUtil;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 
 @RestController
 public class AuthController {

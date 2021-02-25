@@ -29,7 +29,7 @@ public class ActionController {
             Action savedAction = actionService.addOrUpdateAction(action);
             return ResponseEntity.ok(savedAction);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to add a action."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to add an action."));
         }
     }
 
@@ -39,7 +39,7 @@ public class ActionController {
             Action savedAction = actionService.addOrUpdateAction(action);
             return ResponseEntity.ok(savedAction);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a new action."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update an action."));
         }
     }
 
@@ -49,7 +49,7 @@ public class ActionController {
             actionService.deleteAction(action_id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body( new ErrorMessage("Something went wrong whilst trying to update a new action."));
+            return ResponseEntity.badRequest().body( new ErrorMessage("Something went wrong whilst trying to delete an action."));
         }
     }
 }

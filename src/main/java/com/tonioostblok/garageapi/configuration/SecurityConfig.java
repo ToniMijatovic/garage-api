@@ -23,25 +23,6 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//
-//    @Override
-//    protected void configure(HttpSecurity security) throws Exception
-//    {
-//        security.httpBasic().disable();
-//        security.cors().and().csrf().disable();
-//    }
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("*"));
-//        configuration.setAllowedMethods(Arrays.asList("*"));
-//        configuration.setAllowedHeaders(Arrays.asList("*"));
-//        configuration.setAllowCredentials(true);
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
-
     @Autowired
     private UserService userService;
 
@@ -65,12 +46,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/auth").permitAll().
+                .authorizeRequests().
+                antMatchers("/customer/**").hasAnyRole("ADMIN", "FRONTOFFICE").
+                antMatchers("/car/**").hasAnyRole("ADMIN", "FRONTOFFICE", "MECHANIC").
+                antMatchers("/repair/**").hasAnyRole("ADMIN", "FRONTOFFICE", "MECHANIC", "CASHIER").
+                antMatchers("/part/**").hasAnyRole("ADMIN", "BACKOFFICE", "MECHANIC").
+                antMatchers("/action/**").hasAnyRole("ADMIN", "BACKOFFICE", "MECHANIC").
+                antMatchers("/file/**").hasAnyRole("ADMIN", "FRONTOFFICE").
+                antMatchers("/auth").permitAll().
                 anyRequest().authenticated().and().
-                exceptionHandling().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                exceptionHandling().and().sessionManagement().
+                sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }

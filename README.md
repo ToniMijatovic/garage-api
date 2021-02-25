@@ -47,7 +47,7 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 
 {
-    "message": "iThe username or password is not correct.",
+    "message": "The username or password is not correct.",
 }
 ``` 
 ## Me
@@ -91,6 +91,9 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+{
+  "message":"Something went wrong while trying to fetch the user."
+}
 ``` 
 
 ## Car endpoints
@@ -125,11 +128,18 @@ Content-Type: application/json
     ]
 }
 ```
-**Failed Response:**
+**Failed Response(s):**
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message": "The car that you have tried to fetch does not exist."
+}
+```
 
 ```json
 POST /car
@@ -157,11 +167,19 @@ Content-Type: application/json
     "mot": "2021-01-06",
 }
 ```
-**Failed Response:**
+**Failed Response(s):**
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message": "Something went wrong whilst trying to add a car."
+}
+```
 
 ```json
 PUT /car
@@ -190,11 +208,19 @@ Content-Type: application/json
     "mot": "2021-01-06",
 }
 ```
-**Failed Response:**
+**Failed Response(s):**
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message": "Something went wrong whilst trying to update a car."
+}
+```
 
 ```json
 DEL /car/{id}
@@ -212,6 +238,15 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message": "Something went wrong whilst trying to delete a car."
+}
+```
+
 ## Customer endpoints
 ```json
 GET /customer/{id}
@@ -254,6 +289,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"The customer that you have tried to fetch does not exist."
+}
 ``` 
 
 ```json
@@ -310,6 +353,14 @@ Content-Type: application/json
 ``` 
 
 ```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to add a customer."
+}
+``` 
+
+```json
 PUT /customer
 Accept: application/json
 Content-Type: application/json
@@ -347,6 +398,14 @@ Content-Type: application/json
 ``` 
 
 ```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to update a customer."
+}
+``` 
+
+```json
 DEL /customer/{id}
 Accept: application/json
 Content-Type: application/json
@@ -362,6 +421,15 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to delete a customer."
+}
+``` 
+
 ```json
 POST /customer/{customer_id}/car/{car_id}
 Accept: application/json
@@ -403,6 +471,15 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to add a car to a customer."
+}
+``` 
+
 ```json
 DEL /customer/{customer_id}/car/{car_id}
 Accept: application/json
@@ -419,6 +496,15 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to delete a car to a customer."
+}
+``` 
+
 ## Part endpoints
 ```json
 GET /part/{id}
@@ -442,6 +528,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"The part that you have tried to fetch does not exist."
+}
 ``` 
 
 ```json
@@ -472,6 +566,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to add a part."
+}
 ``` 
 
 ```json
@@ -506,6 +608,14 @@ Content-Type: application/json
 ``` 
 
 ```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to update a part."
+}
+``` 
+
+```json
 DEL /part/{id}
 Accept: application/json
 Content-Type: application/json
@@ -520,6 +630,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to delete a part."
+}
 ``` 
 
 ## Action endpoints
@@ -545,6 +663,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"The action that you have tried to fetch does not exist."
+}
 ``` 
 
 ```json
@@ -575,6 +701,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to add an action."
+}
 ``` 
 
 ```json
@@ -609,6 +743,14 @@ Content-Type: application/json
 ``` 
 
 ```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to update an action."
+}
+``` 
+
+```json
 DEL /action/{id}
 Accept: application/json
 Content-Type: application/json
@@ -623,6 +765,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to delete an action."
+}
 ``` 
 
 ## Repairs endpoints
@@ -680,6 +830,15 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"The repair that you have tried to fetch does not exist."
+}
+``` 
+
 ```json
 GET /repair (returns all repairs)
 Accept: application/json
@@ -736,6 +895,14 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to fetch all repairs."
+}
 ``` 
 
 ```json
@@ -827,7 +994,13 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
-
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to add a repair."
+}
+``` 
 ```json
 PUT /repair
 Accept: application/json
@@ -918,7 +1091,13 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
-
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"The repair that you have tried to update does not exist."
+}
+``` 
 ```json
 DEL /repair/{id}
 Accept: application/json
@@ -935,9 +1114,16 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
-
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"The repair that you have tried to delete does not exist."
+}
+``` 
 ## File endpoints
 ```json
+Fetches file
 GET /file/{id}
 Authorization: Bearer {token}
 ```
@@ -952,9 +1138,16 @@ File will be returned
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ``` 
-
 ```json
-POST /file
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to fetch the file."
+}
+``` 
+```json
+Adds file to a car.
+POST /file/{car_id}
 Accept: multipart/form-data
 Content-Type: multipart/form-data
 Authorization: Bearer {token}
@@ -972,9 +1165,16 @@ Content-Type: application/json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 ```
-
 ```json
-DEL /file/{id}
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to add a file to a car."
+}
+``` 
+```json
+Removes file from car
+DEL /file/{id}/{car_id}
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {token}
@@ -988,4 +1188,11 @@ Content-Type: application/json
 ```json
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
+``` 
+```json
+HTTP/1.1 400 Bad request
+Content-Type: application/json
+{
+  "message":"Something went wrong whilst trying to delete a file from a car."
+}
 ``` 

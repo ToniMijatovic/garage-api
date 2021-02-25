@@ -39,7 +39,7 @@ public class FileController {
 
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-                return ResponseEntity.ok().build();
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to add a file to a car"));
         }
     }
 
@@ -52,17 +52,21 @@ public class FileController {
             fileService.deleteFile(file.getId());
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.ok(new ErrorMessage(e.getMessage()));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to delete a file from a car"));
         }
     }
 
 
     @GetMapping("/file/{id}")
     @ResponseBody
-    public ResponseEntity<Resource> getFile(@PathVariable(value = "id") int file_id) throws IOException {
-        File chosenFile = fileService.getFile(file_id);
-        Resource file = storageService.load(chosenFile.getUrl());
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    public ResponseEntity<?> getFile(@PathVariable(value = "id") int file_id) throws IOException {
+        try{
+            File chosenFile = fileService.getFile(file_id);
+            Resource file = storageService.load(chosenFile.getUrl());
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to fetch the file"));
+        }
     }
 }

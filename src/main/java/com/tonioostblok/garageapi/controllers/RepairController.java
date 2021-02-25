@@ -19,7 +19,7 @@ public class RepairController {
             Repair createdRepair = repairService.getAllRepairInformation(id);
             return ResponseEntity.ok(createdRepair);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to add a repair."));
         }
     }
 

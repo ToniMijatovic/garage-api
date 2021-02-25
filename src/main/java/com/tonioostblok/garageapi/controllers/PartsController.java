@@ -40,7 +40,7 @@ public class PartsController {
             Part savedPart = partService.addOrUpdatePart(part);
             return ResponseEntity.ok(savedPart);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a new part."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a part."));
         }
     }
     @RequestMapping(value = "/part/{id}", method = RequestMethod.DELETE)
@@ -49,7 +49,7 @@ public class PartsController {
             partService.deletePart(part_id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a new part."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to delete a part."));
         }
     }
 }

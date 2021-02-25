@@ -40,7 +40,7 @@ public class CustomerController {
             customerService.addOrUpdateCustomer(customer);
             return ResponseEntity.ok(customer);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to add a customer."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a customer."));
         }
     }
 
@@ -50,7 +50,7 @@ public class CustomerController {
             customerService.deleteUser(customer_id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to add a customer."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to delete a customer."));
         }
     }
 
@@ -60,8 +60,7 @@ public class CustomerController {
             Customer customer = customerService.addCarToCustomer(customer_id, car_id);
             return ResponseEntity.ok(customer);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body("{\"error:" + e.getCause() + "}");
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to add a car to a customer."));
         }
     }
 
@@ -71,8 +70,7 @@ public class CustomerController {
             Customer customer = customerService.removeCarFromCustomer(customer_id, car_id);
             return ResponseEntity.ok(customer);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body("{\"error:" + e.getCause() + "}");
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to delete a car to a customer."));
         }
     }
 }

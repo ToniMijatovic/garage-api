@@ -38,7 +38,7 @@ public class CarController {
             Car savedCar = carService.addOrUpdateCar(car);
             return ResponseEntity.ok(savedCar);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a new car."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a car."));
         }
     }
     @RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE)
@@ -47,7 +47,7 @@ public class CarController {
             carService.deleteCar(car_id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to update a new car."));
+            return ResponseEntity.badRequest().body(new ErrorMessage("Something went wrong whilst trying to delete a car."));
         }
     }
 }
